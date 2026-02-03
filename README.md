@@ -131,6 +131,80 @@ Final Model Evaluation on Test Set
 
 ---
 
+## 📊 Results & Interpretation
+
+### Cross-Validation Performance (Recall)
+
+All models were tuned using **GridSearchCV with stratified cross-validation**, optimizing for **recall** due to the high cost of missing churners.
+
+| Model | Best CV Recall |
+|------|---------------|
+| Logistic Regression | **0.548** |
+| Support Vector Classifier (Linear) | 0.531 |
+| Decision Tree | 0.524 |
+
+**Interpretation:**
+- All three models achieved **similar recall**, indicating that model choice has less impact than feature quality.
+- Logistic Regression achieved the **highest recall**, although the margin was small.
+- This suggests the problem is **feature-limited rather than model-limited**.
+
+---
+
+### Test-Set ROC-AUC Performance
+
+ROC-AUC was computed using **predicted probabilities or decision scores** on the unseen test set.
+
+| Model | Test ROC-AUC |
+|-----|-------------|
+| Logistic Regression | **0.84** |
+| Support Vector Classifier | 0.83 |
+| Decision Tree | 0.76   |
+
+**Interpretation:**
+- Logistic Regression showed the **best class-separation ability**, meaning it ranks churners higher than non-churners more consistently.
+- Decision Trees exhibited the weakest generalization performance, likely due to overfitting.
+- SVC performed competitively but did not surpass Logistic Regression.
+
+---
+
+### Confusion Matrix Analysis
+
+Confusion matrices were analyzed to understand **False Negatives (FN)** and **False Positives (FP)**.
+
+**Key Observations:**
+- Logistic Regression produced **fewer False Negatives**, which is critical for churn prediction.
+- While False Positives still exist, this trade-off is acceptable because contacting a non-churner is less costly than losing a customer.
+
+---
+
+### Final Model Selection
+
+Despite similar performance across models, **Logistic Regression** was selected as the final model due to:
+
+- Highest recall on cross-validation and test data
+- Best ROC-AUC score
+- Greater stability and lower overfitting risk
+- Strong interpretability for business stakeholders
+- Simpler deployment and maintenance
+
+> When performance is comparable, **robustness and interpretability outweigh model complexity**.
+
+---
+
+### Business Implications
+
+- The selected model prioritizes **identifying as many churners as possible**, reducing customer loss.
+- The model can support customer retention strategies by flagging high-risk users early.
+- Future improvements are more likely to come from **feature engineering or decision-threshold tuning** rather than more complex models.
+
+---
+
+### 🧠 Key Takeaway
+
+This project demonstrates that **metric selection, proper evaluation strategy, and interpretability** are more important than model complexity in real-world machine learning systems.
+
+
+
 ## 🏆 Final Model Selection
 
 **Logistic Regression** was selected as the final model because:
